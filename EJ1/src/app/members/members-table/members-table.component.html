@@ -1,0 +1,26 @@
+<h2>Members Page</h2>
+
+<form #membersTableForm="ngForm" (ngSubmit)="loadMembers(membersTableForm.value)" autocomplete="off" novalidate>
+  <input type="text" name="membersName" [(ngModel)]="membersName" />
+  &nbsp;
+  <button class="btn btn-primary" type="submit">
+    Load
+  </button>
+  <table class="table table-responsive mt-3">
+    <thead app-member-head></thead>
+    <tbody>
+      <div *ngIf="members?.length > 0; else notRecordsShow">
+        <tr
+          app-member-row
+          [member]="member"
+          *ngFor="let member of members"
+        ></tr>
+      </div>
+      <ng-template #notRecordsShow>
+        <tr>
+          <td><p>Not records found</p></td>
+        </tr>
+      </ng-template>
+    </tbody>
+  </table>
+</form>
